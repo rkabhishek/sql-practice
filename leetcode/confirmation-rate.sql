@@ -3,7 +3,7 @@
 WITH Confirmation_Rate
 AS (
     SELECT user_id,
-        ROUND(COUNT(CASE WHEN action = 'confirmed' THEN 1 ELSE NULL END) / COUNT(*), 2) AS confirmation_rate
+        ROUND(COUNT(CASE WHEN action = 'confirmed' THEN 1 END) / COUNT(*), 2) AS confirmation_rate
     FROM Confirmations
     GROUP BY user_id)
 
