@@ -20,3 +20,10 @@ WHERE id IN
         GROUP BY managerId
         HAVING COUNT(*) >= 5);
 
+
+-- solution 3 using join without CTE
+SELECT m.name
+FROM Employee e JOIN Employee m
+ON e.managerId = m.id
+GROUP BY m.id
+HAVING COUNT(*) >= 5;
