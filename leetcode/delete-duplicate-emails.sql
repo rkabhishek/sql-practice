@@ -6,7 +6,8 @@ WITH Smallest_Id AS (
     GROUP BY email
 )
 
-
-DELETE
-FROM Person
-WHERE id NOT IN (SELECT id FROM Smallest_Id);
+DELETE p
+FROM Person p
+LEFT JOIN Smallest_Id s
+ON p.id = s.id
+WHERE s.id IS NULL;
