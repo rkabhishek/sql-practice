@@ -14,3 +14,10 @@ WHERE NOT EXISTS (
     FROM Orders o
     WHERE o.customer_Id = c.id
 );
+
+-- solution 3 using LEFT JOIN
+SELECT c.name AS Customers
+FROM Customers c
+LEFT JOIN Orders o
+ON c.id = o.customerId
+WHERE o.id IS NULL;
