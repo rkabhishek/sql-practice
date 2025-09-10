@@ -19,3 +19,15 @@ WHERE NOT EXISTS (
     AND YEAR(sale_date) = 2020
 )
 ORDER BY s.seller_name;
+
+-- solution 3 using LEFT JOIN
+-- this doesn't join the entire orders table, but only the sellers which had sales in 2020 and then excludes them
+SELECT s.seller_name
+FROM Seller s
+LEFT JOIN (
+    SELECT DISTINCT seller_id
+    FROM Orders
+    WHERE YEAR(sale_date) = 2020
+) o on s.seller_id = o.seller_id
+WHERE o.seller_id IS NULL
+ORDER BY s.seller_name;
