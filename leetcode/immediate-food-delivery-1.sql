@@ -7,3 +7,7 @@ FROM Delivery;
 -- solution 2: may not work in every SQL engine because boolean isn't converted to 0 and 1
 SELECT ROUND(SUM(order_date = customer_pref_delivery_date) * 100.0 / COUNT(*), 2) AS immediate_percentage
 FROM Delivery;
+
+-- solution 3: may not work in every SQL engine because boolean isn't converted to 0 and 1
+SELECT ROUND(AVG(order_date = customer_pref_delivery_date) * 100.0, 2) AS immediate_percentage
+FROM Delivery;
