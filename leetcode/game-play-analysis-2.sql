@@ -19,3 +19,14 @@ WHERE (player_id, event_date) IN (
     FROM Activity
     GROUP BY player_id
 );
+
+-- solution 3 using ROW_NUMBER window function
+WITH event_dates_ranked AS (
+    SELECT player_id, device_id,
+        ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY event_date) AS row_num
+    FROM Activity
+)
+
+SELECT player_id, device_id
+FROM event_dates_ranked
+WHERE row_num = 1;
