@@ -12,7 +12,7 @@ FROM Customers c
 WHERE NOT EXISTS (
     SELECT 1
     FROM Orders o
-    WHERE o.customer_Id = c.id
+    WHERE o.customerId = c.id
 );
 
 -- solution 3 using LEFT JOIN
