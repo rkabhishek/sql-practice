@@ -1,6 +1,13 @@
+WITH stats AS (
+    SELECT
+        tweet_id,
+        CHAR_LENGTH(content) AS len,
+        CHAR_LENGTH(content) - CHAR_LENGTH(REPLACE(content, '@', '')) AS mentions,
+        CHAR_LENGTH(content) - CHAR_LENGTH(REPLACE(content, '#', '')) AS hashtags
+    FROM Tweets
+)
+
 SELECT tweet_id
-FROM Tweets
-WHERE CHAR_LENGTH(content) > 140
-    OR (CHAR_LENGTH(content) - CHAR_LENGTH(REPLACE(content, '@', '')) > 3)
-    OR (CHAR_LENGTH(content) - CHAR_LENGTH(REPLACE(content, '#', '')) > 3)
+FROM stats
+WHERE len > 140 OR mentions > 3 or hashtags > 3
 ORDER BY tweet_id;
